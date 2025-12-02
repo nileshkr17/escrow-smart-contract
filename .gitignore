@@ -1,0 +1,14 @@
+# Node
+node_modules/
+npm-debug.log
+
+# Hardhat
+artifacts/
+cache/
+coverage/
+
+# Environment
+.env
+
+# Mac files
+.DS_Store
