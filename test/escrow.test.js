@@ -146,6 +146,20 @@ describe("Escrow", function () {
       await newEscrow.connect(arbiter).refund();
       await expect(newEscrow.connect(arbiter).release()).to.be.revertedWith("Not funded");
     });
+
+    it("should revert release with 'Transfer failed' if beneficiary rejects ETH", async function () {
+      // Deploy a Rejector beneficiary and a fresh escrow with it
+      const RejectorFactory = await ethers.getContractFactory("Rejector");
+      const rejector = await RejectorFactory.deploy();
+      await rejector.waitForDeployment();
+
+      const EscrowFactory = await ethers.getContractFactory("Escrow");
+      const esc2 = await EscrowFactory.connect(depositor).deploy(await rejector.getAddress(), arbiter.address);
+      await esc2.waitForDeployment();
+      await esc2.connect(depositor).deposit({ value: depositAmount });
+
+      await expect(esc2.connect(arbiter).release()).to.be.revertedWith("Transfer failed");
+    });
   });
 
   describe("Refund", function () {

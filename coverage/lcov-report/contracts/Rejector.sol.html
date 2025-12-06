@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <title>Code coverage report for contracts/Attacker.sol</title>
+    <title>Code coverage report for contracts/Rejector.sol</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../prettify.css" />
     <link rel="stylesheet" href="../base.css" />
@@ -16,7 +16,7 @@
 <div class='wrapper'>
   <div class='pad1'>
     <h1>
-      <a href="../index.html">all files</a> / <a href="index.html">contracts/</a> Attacker.sol
+      <a href="../index.html">all files</a> / <a href="index.html">contracts/</a> Rejector.sol
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
@@ -27,17 +27,17 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>4/4</span>
+        <span class='fraction'>0/0</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>3/3</span>
+        <span class='fraction'>0/0</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>5/5</span>
+        <span class='fraction'>1/1</span>
       </div>
     </div>
   </div>
@@ -52,91 +52,22 @@
 7
 8
 9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+10</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3×</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2×</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">// SPDX-License-Identifier: MIT
 pragma solidity ^0.8.19;
 &nbsp;
-interface IEscrow {
-    function release() external;
-    function refund() external;
-}
-&nbsp;
-// Malicious beneficiary that attempts to reenter Escrow during ETH transfer
-contract Attacker {
-    IEscrow public target;
-    bool public tryRelease;
-    bool public tryRefund;
-&nbsp;
-    constructor(IEscrow _target) {
-        target = _target;
-    }
-&nbsp;
-    function setTryRelease(bool v) external { tryRelease = v; }
-    function setTryRefund(bool v) external { tryRefund = v; }
-&nbsp;
+// Simple contract that rejects incoming ETH via receive()
+contract Rejector {
     receive() external payable {
-        if (tryRelease) {
-            // Attempt to reenter release
-            try target.release() {} catch {}
-        }
-        if (tryRefund) {
-            // Attempt to reenter refund
-            try target.refund() {} catch {}
-        }
+        revert("reject");
     }
 }
 &nbsp;</pre></td></tr>

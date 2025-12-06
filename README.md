@@ -84,6 +84,11 @@ GitHub Actions workflow runs on pushes/PRs to `main`:
 
 Workflow file: `.github/workflows/ci.yml`.
 
+If the repository is private, add a GitHub Actions secret for Codecov:
+- In GitHub → Settings → Secrets and variables → Actions → New secret
+- Name: `CODECOV_TOKEN`
+- Value: token from your Codecov project settings
+
 ## Badges
 - CI Status: GitHub Actions
 - Coverage: Codecov (branch `main`)
