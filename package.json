@@ -1,29 +1,17 @@
 {
   "name": "escrow-smart-contract",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npx hardhat test",
+    "coverage": "npx hardhat coverage"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/nileshkr17/escrow-smart-contract.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs",
-  "bugs": {
-    "url": "https://github.com/nileshkr17/escrow-smart-contract/issues"
-  },
-  "homepage": "https://github.com/nileshkr17/escrow-smart-contract#readme",
   "devDependencies": {
-    "@nomicfoundation/hardhat-ethers": "^4.0.3",
-    "@openzeppelin/contracts": "^5.4.0",
-    "chai": "^6.2.1",
-    "ethers": "^6.15.0",
-    "hardhat": "^3.0.16",
-    "mocha": "^11.7.5"
+    "@nomicfoundation/hardhat-toolbox": "^5.0.0",
+    "@openzeppelin/contracts": "^5.0.1",
+    "chai": "^4.3.7",
+    "dotenv": "^17.2.3",
+    "ethers": "^6.7.0",
+    "hardhat": "^2.19.1",
+    "solidity-coverage": "^0.8.16"
   }
 }
